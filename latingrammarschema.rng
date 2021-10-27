@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+    xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+    datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <start>
+        <ref name="element.collection"/>
+    </start>
+
+    <define name="element.collection">
+        <element name="collection">
+            <oneOrMore>
+                <ref name="element.author"/>
+            </oneOrMore>
+            <oneOrMore>
+                <ref name="element.collection_title"/>
+            </oneOrMore>
+            <oneOrMore>
+                <ref name="element.poem"/>
+            </oneOrMore>
+        </element>
+    </define>
+    <define name="element.author">
+        <element name="author">
+            <text/>
+        </element>
+    </define>
+    <define name="element.collection_title">
+        <element name="collection_title">
+            <text/>
+        </element>
+    </define>
+    <define name="element.poem">
+        <element name="poem">
+            <oneOrMore>
+                <ref name="element.poem_number"/>
+            </oneOrMore>
+            <oneOrMore>
+                <ref name="element.line"/>
+            </oneOrMore>
+        </element>
+    </define>
+    <define name="element.poem_number">
+        <element name="poem_number">
+            <attribute name="n">
+                <data type="nonNegativeInteger"/>
+            </attribute>
+        </element>
+    </define>
+    <define name="element.line">
+        <element name="line">
+            <text/>
+            <oneOrMore>
+                <ref name="element.parse"/>
+            </oneOrMore>
+        </element>
+    </define>
+    <define name="element.parse">
+        <element name="parse">
+            <oneOrMore>
+                <text/>
+            </oneOrMore>
+            <choice>
+                <ref name="element.noun"/>
+                <ref name="element.verb"/>
+                <ref name="element.participle"/>
+                <ref name="element.adjective"/>
+                <ref name="element.particle"/>
+                <ref name="element.adverb"/>
+            </choice>
+        </element>
+    </define>
+    <define name="element.noun">
+        <element name="noun">
+            <zeroOrMore>
+                <ref name="element.gender"/>
+                <ref name="element.number"/>
+                <ref name="element.case"/>
+            </zeroOrMore>
+        </element>
+    </define>
+    <define name="element.gender">
+        <element name="gender">
+            <choice>
+                <value>masculine</value>
+                <value>feminine</value>
+                <value>neuter</value>
+            </choice>
+        </element>
+    </define>
+    <define name="element.number">
+        <element name="number">
+            <choice>
+                <value>singular</value>
+                <value>dual</value>
+                <value>plural</value>
+                <value>infinitive</value>
+            </choice>
+        </element>
+    </define>
+    <define name="element.case">
+        <element name="case">
+            <choice>
+                <value>nominative</value>
+                <value>accusative</value>
+                <value>genitive</value>
+                <value>dative</value>
+                <value>ablative</value>
+                <value>vocative</value>
+            </choice>
+        </element>
+    </define>
+    <define name="element.verb">
+        <element name="verb">
+            <oneOrMore>
+                <ref name="element.person"/>
+                <ref name="element.number"/>
+                <ref name="element.tense"/>
+                <ref name="element.mood"/>
+                <ref name="element.voice"/>
+            </oneOrMore>
+        </element>
+    </define>
+    <define name="element.person">
+        <element name="person">
+            <choice>
+                <value>first</value>
+                <value>second</value>
+                <value>third</value>
+                <value>infinitive</value>
+            </choice>
+        </element>
+    </define>
+    <define name="element.tense">
+        <element name="tense">
+            <choice>
+                <value>present</value>
+                <value>future</value>
+                <value>imperfect</value>
+                <value>perfect</value>
+                <value>future_perfect</value>
+                <value>pluperfect</value>
+            </choice>
+        </element>
+    </define>
+    <define name="element.mood">
+        <element name="mood">
+            <choice>
+                <value>infinitive</value>
+                <value>indicative</value>
+                <value>imperative</value>
+                <ref name="element.subjunctive"/>
+            </choice>
+        </element>
+    </define>
+    <define name="element.subjunctive">
+        <element name="subjunctive">
+            <choice>
+                <value>hortatory</value>
+                <value>jussive</value>
+                <value>purpose</value>
+                <value>result</value>
+                <value>indirect_question</value>
+                <value>circumstantial</value>
+                <value>causal</value>
+            </choice>
+        </element>
+    </define>
+    <define name="element.voice">
+        <element name="voice">
+            <choice>
+                <value>active</value>
+                <value>passive</value>
+                <value>deponent</value>
+            </choice>
+        </element>
+    </define>
+    <define name="element.participle">
+        <oneOrMore>
+            <ref name="element.number"/>
+            <ref name="element.tense"/>
+            <ref name="element.gender"/>
+            <ref name="element.case"/>
+        </oneOrMore>
+    </define>
+    <define name="element.adjective">
+        <element name="adjective">
+            <oneOrMore>
+                <ref name="element.gender"/>
+                <ref name="element.number"/>
+                <ref name="element.case"/>
+                <ref name="element.comparative"/>
+                <ref name="element.superlative"/>
+            </oneOrMore>
+        </element>
+    </define>
+    <define name="element.superlative">
+        <element name="superlative">
+            <empty/>
+        </element>
+    </define>
+    <define name="element.comparative">
+        <element name="comparative">
+            <empty/>
+        </element>
+    </define>
+    <define name="element.particle">
+        <element name="particle">
+            <choice>
+                <ref name="element.preposition"/>
+                <ref name="element.negative"/>
+                <ref name="element.conjunction"/>
+                <ref name="element.interrogative"/>
+                <ref name="element.interjection"/>
+            </choice>
+        </element>
+    </define>
+    <define name="element.negative">
+        <element name="negative">
+            <empty/>
+        </element>
+    </define>
+    <define name="element.conjunction">
+        <element name="conjunction">
+            <empty/>
+        </element>
+    </define>
+    <define name="element.interrogative">
+        <element name="interrogative">
+            <empty/>
+        </element>
+    </define>
+    <define name="element.interjection">
+        <element name="interjection">
+            <empty/>
+        </element>
+    </define>
+    <define name="element.preposition">
+        <element name="preposition">
+            <ref name="element.case"/>
+        </element>
+    </define>
+    <define name="element.adverb">
+        <element name="adverb">
+            <choice>
+                <value>comparative</value>
+                <value>superlative</value>
+                <value>interrogative</value>
+                <value>positive</value>
+            </choice>
+        </element>
+    </define>
+</grammar>
